@@ -28,6 +28,10 @@
 			antialias: true,
 			alpha: true,
 		});
+
+		var clock = new THREE.Clock();
+		var mixers = [];
+
 		renderer.setClearColor(new THREE.Color("lightgrey"), 0);
 		renderer.setSize(640, 480);
 		renderer.domElement.style.position = "absolute";
@@ -132,6 +136,9 @@
 
 			scene.visible = false;
 
+			// var root = new THREE.Object3D();
+			// scene.add(root);
+
 			console.log("ArMarkerControls", arMarkerControls);
 			window.arMarkerControls = arMarkerControls;
 		}
@@ -164,6 +171,9 @@
 			scene.visible = camera.visible;
 		});
 
+		var root = new THREE.Object3D();
+		scene.add(root);
+
 		//////////////////////////////////////////////////////////////////////////////////
 		//		add an object in the scene
 		//////////////////////////////////////////////////////////////////////////////////
@@ -174,57 +184,73 @@
 		threeGLTFLoader.load(
 			"./resources/Flamingo.glb",
 			function (gltf) {
-				scene.add(gltf.scene);
+				model = gltf.scene.children[0];
+				model.name = "Flamingo";
+
+				var animation = gltf.animations[0];
+				var mixer = new THREE.AnimationMixer(model);
+				mixers.push(mixer);
+				var action = mixer.clipAction(animation);
+				action.play();
+
+				root.matrixAutoUpdate = false;
+				root.add(model);
+
+				model.position.z = -200;
+				model.position.x = 100;
+				model.position.y = 100;
+
+				// scene.add(gltf.scene);
+
+				// add a torus knot
+				var geometry = new THREE.BoxGeometry(1, 1, 1);
+				var material = new THREE.MeshNormalMaterial({
+					transparent: true,
+					opacity: 0.5,
+					side: THREE.DoubleSide,
+				});
+				var mesh = new THREE.Mesh(geometry, material);
+				mesh.position.y = geometry.parameters.height / 2;
+				scene.add(mesh);
+
+				// var geometry = new THREE.TorusKnotGeometry(0.3, 0.1, 64, 16);
+				// var material = new THREE.MeshNormalMaterial();
+				// var mesh = new THREE.Mesh(geometry, material);
+				// mesh.position.y = 0.5;
+				// scene.add(mesh);
+
+				onRenderFcts.push(function (delta) {
+					mesh.rotation.x += Math.PI * delta;
+				});
+
+				//////////////////////////////////////////////////////////////////////////////////
+				//		render the whole thing on the page
+				//////////////////////////////////////////////////////////////////////////////////
+
+				// render the scene
+				onRenderFcts.push(function () {
+					renderer.render(scene, camera);
+				});
+
+				// run the rendering loop
+				var lastTimeMsec = null;
+				requestAnimationFrame(function animate(nowMsec) {
+					// keep looping
+					requestAnimationFrame(animate);
+					// measure time
+					lastTimeMsec = lastTimeMsec || nowMsec - 1000 / 60;
+					var deltaMsec = Math.min(200, nowMsec - lastTimeMsec);
+					lastTimeMsec = nowMsec;
+					// call each update function
+					onRenderFcts.forEach(function (onRenderFct) {
+						onRenderFct(deltaMsec / 1000, nowMsec / 1000);
+					});
+				});
 			},
 			undefined,
 			function (error) {
 				console.error(error);
 			}
 		);
-
-		// add a torus knot
-		var geometry = new THREE.BoxGeometry(1, 1, 1);
-		var material = new THREE.MeshNormalMaterial({
-			transparent: true,
-			opacity: 0.5,
-			side: THREE.DoubleSide,
-		});
-		var mesh = new THREE.Mesh(geometry, material);
-		mesh.position.y = geometry.parameters.height / 2;
-		scene.add(mesh);
-
-		// var geometry = new THREE.TorusKnotGeometry(0.3, 0.1, 64, 16);
-		// var material = new THREE.MeshNormalMaterial();
-		// var mesh = new THREE.Mesh(geometry, material);
-		// mesh.position.y = 0.5;
-		// scene.add(mesh);
-
-		onRenderFcts.push(function (delta) {
-			mesh.rotation.x += Math.PI * delta;
-		});
-
-		//////////////////////////////////////////////////////////////////////////////////
-		//		render the whole thing on the page
-		//////////////////////////////////////////////////////////////////////////////////
-
-		// render the scene
-		onRenderFcts.push(function () {
-			renderer.render(scene, camera);
-		});
-
-		// run the rendering loop
-		var lastTimeMsec = null;
-		requestAnimationFrame(function animate(nowMsec) {
-			// keep looping
-			requestAnimationFrame(animate);
-			// measure time
-			lastTimeMsec = lastTimeMsec || nowMsec - 1000 / 60;
-			var deltaMsec = Math.min(200, nowMsec - lastTimeMsec);
-			lastTimeMsec = nowMsec;
-			// call each update function
-			onRenderFcts.forEach(function (onRenderFct) {
-				onRenderFct(deltaMsec / 1000, nowMsec / 1000);
-			});
-		});
 	</script>
 </body>
