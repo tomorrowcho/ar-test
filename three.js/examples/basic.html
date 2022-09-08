@@ -119,7 +119,8 @@
 			// MARKER
 			arMarkerControls = new THREEx.ArMarkerControls(arToolkitContext, camera, {
 				type: "pattern",
-				patternUrl: THREEx.ArToolkitContext.baseURL + "../data/data/pattern-raccoon-color.patt",
+				patternUrl: THREEx.ArToolkitContext.baseURL + "../data/data/pattern-2522866889_Cute_girl__by_Gustav_Klimt_by_Auguste_Renoir.patt",
+				// patternUrl: THREEx.ArToolkitContext.baseURL + "../data/data/pattern-raccoon-color.patt",
 				// patternUrl:
 				// 	THREEx.ArToolkitContext.baseURL +
 				// 	"examples/marker-training/examples/pattern-files/pattern-2522866889_Cute_girl__by_Gustav_Klimt_by_Auguste_Renoir.patt",
@@ -188,19 +189,19 @@
 			mesh.rotation.x += Math.PI * delta;
 		});
 
-		var threeGLTFLoader = new THREE.GLTFLoader();
-		var model;
-		// console.log(model.name);
-		threeGLTFLoader.load(
-			"./resources/Flamingo.glb",
-			function (gltf) {
-				scene.add(gltf.scene);
-			},
-			undefined,
-			function (error) {
-				console.error(error);
-			}
-		);
+		// var threeGLTFLoader = new THREE.GLTFLoader();
+		// var model;
+		// // console.log(model.name);
+		// threeGLTFLoader.load(
+		// 	"./resources/Flamingo.glb",
+		// 	function (gltf) {
+		// 		scene.add(gltf.scene);
+		// 	},
+		// 	undefined,
+		// 	function (error) {
+		// 		console.error(error);
+		// 	}
+		// );
 
 		//////////////////////////////////////////////////////////////////////////////////
 		//		render the whole thing on the page
