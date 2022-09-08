@@ -68,12 +68,7 @@
 
 		arToolkitSource.init(function onReady() {
 			arToolkitSource.domElement.addEventListener("canplay", () => {
-				console.log(
-					"canplay",
-					"actual source dimensions",
-					arToolkitSource.domElement.videoWidth,
-					arToolkitSource.domElement.videoHeight
-				);
+				console.log("canplay", "actual source dimensions", arToolkitSource.domElement.videoWidth, arToolkitSource.domElement.videoHeight);
 
 				initARContext();
 			});
@@ -141,11 +136,7 @@
 				return null;
 			}
 
-			console.log(
-				"actual source dimensions",
-				arToolkitSource.domElement.videoWidth,
-				arToolkitSource.domElement.videoHeight
-			);
+			console.log("actual source dimensions", arToolkitSource.domElement.videoWidth, arToolkitSource.domElement.videoHeight);
 
 			if (arToolkitSource.domElement.videoWidth > arToolkitSource.domElement.videoHeight) {
 				console.log("source orientation", "landscape");
@@ -173,7 +164,7 @@
 		//////////////////////////////////////////////////////////////////////////////////
 
 		// add a torus knot
-		var geometry = new THREE.BoxGeometry(1, 1, 1);
+		var geometry = new THREE.CubeGeometry(1, 1, 1);
 		var material = new THREE.MeshNormalMaterial({
 			transparent: true,
 			opacity: 0.5,
