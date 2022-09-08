@@ -2,6 +2,10 @@
 <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 <!-- three.js library -->
 <script src="vendor/three.js/build/three.min.js"></script>
+
+<!-- three.js load GLTF -->
+<script src="vendor/three.js/GLTFLoader.js"></script>
+
 <!-- ar.js -->
 <script src="../build/ar-threex.js"></script>
 <script>
@@ -124,6 +128,9 @@
 			});
 
 			scene.visible = false;
+			var root = new THREE.Object3D();
+			scene.add(root);
+
 
 			console.log("ArMarkerControls", arMarkerControls);
 			window.arMarkerControls = arMarkerControls;
@@ -162,21 +169,76 @@
 		//////////////////////////////////////////////////////////////////////////////////
 
 		// add a torus knot
-		var geometry = new THREE.BoxGeometry(1, 1, 1);
-		var material = new THREE.MeshNormalMaterial({
-			transparent: true,
-			opacity: 0.5,
-			side: THREE.DoubleSide,
-		});
-		var mesh = new THREE.Mesh(geometry, material);
-		mesh.position.y = geometry.parameters.height / 2;
-		scene.add(mesh);
+		// var geometry = new THREE.BoxGeometry(1, 1, 1);
+		// var material = new THREE.MeshNormalMaterial({
+		// 	transparent: true,
+		// 	opacity: 0.5,
+		// 	side: THREE.DoubleSide,
+		// });
+		// var mesh = new THREE.Mesh(geometry, material);
+		// mesh.position.y = geometry.parameters.height / 2;
+		// scene.add(mesh);
 
 		// var geometry = new THREE.TorusKnotGeometry(0.3, 0.1, 64, 16);
 		// var material = new THREE.MeshNormalMaterial();
 		// var mesh = new THREE.Mesh(geometry, material);
 		// mesh.position.y = 0.5;
 		// scene.add(mesh);
+
+		//////////////////////////////////////////////////////////////////////////////////
+		//		add an object in the scene
+		//////////////////////////////////////////////////////////////////////////////////
+
+		var threeGLTFLoader = new THREE.GLTFLoader();
+		var model;
+		console.log(modal.name);
+		threeGLTFLoader.load("./resources/band-example/raccoon/scene.gltf", function (gltf) {
+			// threeGLTFLoader.load("./resources/Flamingo.glb", function (gltf) {
+			model = gltf.scene.children[0];
+			model.name = "Raccoon";
+			// model.name = "Flamingo";
+
+			var animation = gltf.animations[0];
+			var mixer = new THREE.AnimationMixer(model);
+			mixers.push(mixer);
+			var action = mixer.clipAction(animation);
+			action.play();
+
+			root.matrixAutoUpdate = false;
+			root.add(model);
+
+			model.position.z = -200;
+			model.position.x = 100;
+			model.position.y = 100;
+
+			//////////////////////////////////////////////////////////////////////////////////
+			//		render the whole thing on the page
+			//////////////////////////////////////////////////////////////////////////////////
+
+			var animate = function () {
+				requestAnimationFrame(animate);
+
+				if (mixers.length > 0) {
+					for (var i = 0; i < mixers.length; i++) {
+						mixers[i].update(clock.getDelta());
+					}
+				}
+
+				if (!arToolkitSource.ready) {
+					return;
+				}
+
+				arToolkitContext.update(arToolkitSource.domElement);
+
+				// update scene.visible if the marker is seen
+				scene.visible = camera.visible;
+
+				renderer.render(scene, camera);
+			};
+
+			requestAnimationFrame(animate);
+
+
 
 		onRenderFcts.push(function (delta) {
 			mesh.rotation.x += Math.PI * delta;
