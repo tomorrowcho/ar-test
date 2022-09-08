@@ -115,10 +115,8 @@
 			// MARKER
 			arMarkerControls = new THREEx.ArMarkerControls(arToolkitContext, camera, {
 				type: "pattern",
-				patternUrl: THREEx.ArToolkitContext.baseURL + "../data/data/pattern-raccoon-color.patt",
-				// patternUrl:
-				// 	THREEx.ArToolkitContext.baseURL +
-				// 	"examples/marker-training/examples/pattern-files/pattern-2522866889_Cute_girl__by_Gustav_Klimt_by_Auguste_Renoir.patt",
+				// patternUrl: THREEx.ArToolkitContext.baseURL + "../data/data/pattern-raccoon-color.patt",
+				patternUrl: THREEx.ArToolkitContext.baseURL + "../data/data/pattern-2522866889_Cute_girl__by_Gustav_Klimt_by_Auguste_Renoir.patt",
 				// patternUrl: THREEx.ArToolkitContext.baseURL + "../data/data/patt.hiro",
 				// patternUrl: THREEx.ArToolkitContext.baseURL + "../data/data/patt.kanji",
 				// as we controls the camera, set changeMatrixMode: 'cameraTransformMatrix'
@@ -164,7 +162,7 @@
 		//////////////////////////////////////////////////////////////////////////////////
 
 		// add a torus knot
-		var geometry = new THREE.CubeGeometry(1, 1, 1);
+		var geometry = new THREE.BoxGeometry(1, 1, 1);
 		var material = new THREE.MeshNormalMaterial({
 			transparent: true,
 			opacity: 0.5,
@@ -174,11 +172,11 @@
 		mesh.position.y = geometry.parameters.height / 2;
 		scene.add(mesh);
 
-		var geometry = new THREE.TorusKnotGeometry(0.3, 0.1, 64, 16);
-		var material = new THREE.MeshNormalMaterial();
-		var mesh = new THREE.Mesh(geometry, material);
-		mesh.position.y = 0.5;
-		scene.add(mesh);
+		// var geometry = new THREE.TorusKnotGeometry(0.3, 0.1, 64, 16);
+		// var material = new THREE.MeshNormalMaterial();
+		// var mesh = new THREE.Mesh(geometry, material);
+		// mesh.position.y = 0.5;
+		// scene.add(mesh);
 
 		onRenderFcts.push(function (delta) {
 			mesh.rotation.x += Math.PI * delta;
