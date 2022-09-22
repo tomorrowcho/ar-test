@@ -181,8 +181,9 @@
 		loader.load(
 			"./resources/shiba/scene.gltf",
 			(gltf) => {
-				scene.add(gltf.scene.children[0]);
+				scene.scale.set(10, 10, 10);
 				console.log(gltf);
+				scene.add(gltf.scene);
 			},
 			undefined,
 			function (error) {
