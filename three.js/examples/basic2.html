@@ -184,17 +184,20 @@
 		threeGLTFLoader.load(
 			"./resources/Flamingo.glb",
 			function (gltf) {
-				model = gltf.scene.children[0];
-				model.name = "Flamingo";
+				console.log("glft", gltf);
+				var root = gltf.scene;
+				scene.add(root);
+				// model = gltf.scene.children[0];
+				// model.name = "Flamingo";
 
-				var animation = gltf.animations[0];
-				var mixer = new THREE.AnimationMixer(model);
-				mixers.push(mixer);
-				var action = mixer.clipAction(animation);
-				action.play();
+				// var animation = gltf.animations[0];
+				// var mixer = new THREE.AnimationMixer(model);
+				// mixers.push(mixer);
+				// var action = mixer.clipAction(animation);
+				// action.play();
 
-				root.matrixAutoUpdate = false;
-				root.add(model);
+				// root.matrixAutoUpdate = false;
+				// root.add(model);
 
 				// model.position.z = -200;
 				// model.position.x = 100;
@@ -228,29 +231,34 @@
 				//////////////////////////////////////////////////////////////////////////////////
 
 				// render the scene
-				onRenderFcts.push(function () {
-					renderer.render(scene, camera);
-				});
+				// onRenderFcts.push(function () {
+				// 	renderer.render(scene, camera);
+				// });
 
 				// run the rendering loop
-				var lastTimeMsec = null;
-				requestAnimationFrame(function animate(nowMsec) {
-					// keep looping
-					requestAnimationFrame(animate);
-					// measure time
-					lastTimeMsec = lastTimeMsec || nowMsec - 1000 / 60;
-					var deltaMsec = Math.min(200, nowMsec - lastTimeMsec);
-					lastTimeMsec = nowMsec;
-					// call each update function
-					onRenderFcts.forEach(function (onRenderFct) {
-						onRenderFct(deltaMsec / 1000, nowMsec / 1000);
-					});
-				});
+				// var lastTimeMsec = null;
+				// requestAnimationFrame(function animate(nowMsec) {
+				// 	// keep looping
+				// 	requestAnimationFrame(animate);
+				// 	// measure time
+				// 	lastTimeMsec = lastTimeMsec || nowMsec - 1000 / 60;
+				// 	var deltaMsec = Math.min(200, nowMsec - lastTimeMsec);
+				// 	lastTimeMsec = nowMsec;
+				// 	// call each update function
+				// 	onRenderFcts.forEach(function (onRenderFct) {
+				// 		onRenderFct(deltaMsec / 1000, nowMsec / 1000);
+				// 	});
+				// });
 			},
-			undefined,
+			function (xhr) {
+				console.log((xhr, (loaded / xhr.total) * 100) + "% loaded");
+			},
+
 			function (error) {
 				console.error(error);
 			}
 		);
+
+		var light = new THREE.D();
 	</script>
 </body>
