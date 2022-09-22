@@ -177,17 +177,26 @@
 		//////////////////////////////////////////////////////////////////////////////////
 		//		add an object in the scene
 		//////////////////////////////////////////////////////////////////////////////////
-
-		var threeGLTFLoader = new THREE.GLTFLoader();
-		var model;
-		console.log(model);
-		threeGLTFLoader.load("./resources/shiba/scene.gltf", (gltfScene) => {
-			model = gltfScene;
-			console.log(model);
-			model.name = "shiba";
-			model.scene.add(gltfScene.scene);
-
-			// model.scene.scale.set(0.1, 0.1, 0.1);
-		});
+		const loader = new THREE.GLTFLoader();
+		loader.load(
+			"./resources/shiba/scene.gltf",
+			function (gltf) {
+				scene.add(gltf.scene);
+				console.log(scene);
+			},
+			undefined,
+			function (error) {
+				console.error(error);
+			}
+		);
+		// var threeGLTFLoader = new THREE.GLTFLoader();
+		// var model;
+		// threeGLTFLoader.load("./resources/shiba/scene.gltf", (gltfScene) => {
+		// 	// model = gltfScene;
+		// 	// model.name = "shiba";
+		// 	root.add(model);
+		// 	model.scene.add(gltfScene.scene);
+		// 	// model.scene.scale.set(0.1, 0.1, 0.1);
+		// });
 	</script>
 </body>
