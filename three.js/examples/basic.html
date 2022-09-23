@@ -150,14 +150,8 @@
         type: "pattern",
         patternUrl:
           THREEx.ArToolkitContext.baseURL +
-          "../data/data/pattern-2522866889_Cute_girl__by_Gustav_Klimt_by_Auguste_Renoir.patt",
-        // patternUrl: THREEx.ArToolkitContext.baseURL + "../data/data/pattern-raccoon-color.patt",
-        // patternUrl:
-        // 	THREEx.ArToolkitContext.baseURL +
-        // 	"examples/marker-training/examples/pattern-files/pattern-2522866889_Cute_girl__by_Gustav_Klimt_by_Auguste_Renoir.patt",
-        // patternUrl: THREEx.ArToolkitContext.baseURL + "../data/data/patt.hiro",
-        // patternUrl: THREEx.ArToolkitContext.baseURL + "../data/data/patt.kanji",
-        // as we controls the camera, set changeMatrixMode: 'cameraTransformMatrix'
+          "../data/data/pattern-2628447552_candy_necklace_by_Claude_Monet.patt",
+
         changeMatrixMode: "cameraTransformMatrix",
       });
 
@@ -211,27 +205,53 @@
     //////////////////////////////////////////////////////////////////////////////////
     //		add an object in the scene
     //////////////////////////////////////////////////////////////////////////////////
-    const loader = new THREE.GLTFLoader();
-    loader.load(
-      "./resources/shiba/scene.gltf",
-      (gltf) => {
-        scene.scale.set(10, 10, 10);
-        console.log(gltf);
-        scene.add(gltf.scene);
-      },
-      undefined,
-      function (error) {
-        console.error(error);
-      }
-    );
-    // var threeGLTFLoader = new THREE.GLTFLoader();
-    // var model;
-    // threeGLTFLoader.load("./resources/shiba/scene.gltf", (gltfScene) => {
-    // 	// model = gltfScene;
-    // 	// model.name = "shiba";
-    // 	root.add(model);
-    // 	model.scene.add(gltfScene.scene);
-    // 	// model.scene.scale.set(0.1, 0.1, 0.1);
-    // });
+
+    var threeGLTFLoader = new THREE.GLTFLoader();
+    var model;
+    console.log(modal.name);
+    threeGLTFLoader.load("./resources/Flamingo.glb", function (gltf) {
+      model = gltf.scene.children[0];
+      model.name = "Flamingo";
+
+      var animation = gltf.animations[0];
+      var mixer = new THREE.AnimationMixer(model);
+      mixers.push(mixer);
+      var action = mixer.clipAction(animation);
+      action.play();
+
+      root.matrixAutoUpdate = false;
+      root.add(model);
+
+      model.position.z = -200;
+      model.position.x = 100;
+      model.position.y = 100;
+
+      //////////////////////////////////////////////////////////////////////////////////
+      //		render the whole thing on the page
+      //////////////////////////////////////////////////////////////////////////////////
+
+      var animate = function () {
+        requestAnimationFrame(animate);
+
+        if (mixers.length > 0) {
+          for (var i = 0; i < mixers.length; i++) {
+            mixers[i].update(clock.getDelta());
+          }
+        }
+
+        if (!arToolkitSource.ready) {
+          return;
+        }
+
+        arToolkitContext.update(arToolkitSource.domElement);
+
+        // update scene.visible if the marker is seen
+        scene.visible = camera.visible;
+
+        renderer.render(scene, camera);
+      };
+
+      requestAnimationFrame(animate);
+    });
   </script>
 </body>
