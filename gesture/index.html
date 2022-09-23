@@ -2,7 +2,7 @@
 
 <html>
   <head>
-    <title>Gesture Interactions - A-Frame & AR.js test</title>
+    <title>Gesture Interactions - A-Frame & AR.js</title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" href="styles.css" />
@@ -25,7 +25,7 @@
       <a-assets>
         <a-asset-item
           id="bowser"
-          src="https://cdn.glitch.com/06bd98b4-97ee-4c07-a546-fe39ca205034%2Fbowser.glb"
+          src="https://s3.ap-northeast-2.amazonaws.com/yu.nolple.kr/data/shiba/scene.gltf"
         >
         </a-asset-item>
       </a-assets>
@@ -36,6 +36,7 @@
         emitevents="true"
         cursor="fuse: false; rayOrigin: mouse;"
         id="markerA"
+        url="https://s3.ap-northeast-2.amazonaws.com/yu.nolple.kr/data/hiro.png"
       >
         <a-entity
           id="bowser-model"
