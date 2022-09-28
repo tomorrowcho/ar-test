@@ -1,10 +1,10 @@
-## Ar test!
+## Ar test!(AFRAME)
 
-1. <a href="https://tomorrowcho.github.io/ar-test/three.js/index.html" target="_blank">index</a>
-2. <a href="https://tomorrowcho.github.io/ar-test/three.js/examples/basic.html" target="_blank">basic</a>
-3. <a href="https://tomorrowcho.github.io/ar-test/three.js/examples/dev.html" target="_blank">dev</a>
-4. <a href="https://tomorrowcho.github.io/ar-test/three.js/examples/measure-it.html" target="_blank">measure-it</a>
-5. <a href="https://tomorrowcho.github.io/ar-test/three.js/examples/mobile-performance.html" target="_blank">mobile-performance</a>
-6. <a href="https://tomorrowcho.github.io/ar-test/three.js/examples/nft.html" target="_blank">nft</a>
+1. <a href="https://s3.ap-northeast-2.amazonaws.com/yu.nolple.kr/ar-test/aframe/examples/marker-based/basic.html" target="_blank">basic</a>
+
+2. <a href="https://s3.ap-northeast-2.amazonaws.com/yu.nolple.kr/ar-test/gesture/index.html" target="_blank">shiba test</a>
+   
+3. <a href="https://s3.ap-northeast-2.amazonaws.com/yu.nolple.kr/ar-test/gesture/test.html" target="_blank">girl test</a>
+
 
 
