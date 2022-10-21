@@ -14,36 +14,16 @@
 	</head>
 
 	<body>
-		<a-scene
-			arjs
-			embedded
-			renderer="logarithmicDepthBuffer: true;"
-			vr-mode-ui="enabled: false"
-			gesture-detector
-			id="scene"
-		>
+		<a-scene arjs embedded renderer="logarithmicDepthBuffer: true;" vr-mode-ui="enabled: false" gesture-detector id="scene">
 			<a-assets>
 				<a-asset-item id="bowser" src="./data/shiba/scene.gltf"> </a-asset-item>
+			</a-assets>
+			<a-assets>
 				<a-asset-item id="bowser2" src="./data/girl.glb"> </a-asset-item>
 			</a-assets>
 
-			<a-marker
-				preset="hiro"
-				raycaster="objects: .clickable"
-				emitevents="true"
-				cursor="fuse: false; rayOrigin: mouse;"
-				id="markerA"
-				url="./data/hiro.png"
-			>
-				<a-entity
-					id="bowser-model"
-					gltf-model="#bowser"
-					position="0 0 0"
-					scale="0.05 0.05 0.05"
-					class="clickable"
-					gesture-handler
-				>
-				</a-entity>
+			<a-marker preset="hiro" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;" id="markerA" url="./data/hiro.png">
+				<a-entity id="bowser-model" gltf-model="#bowser" position="0 0 0" scale="0.05 0.05 0.05" class="clickable" gesture-handler> </a-entity>
 			</a-marker>
 			<a-marker
 				preset="custom"
@@ -54,17 +34,10 @@
 				id="markerB"
 				url="../data/data/pattern-2522866889_Cute_girl__by_Gustav_Klimt_by_Auguste_Renoir.patt"
 			>
-				<a-entity
-					id="bowser-model2"
-					gltf-model="#bowser2"
-					position="0 0 0"
-					scale="0.05 0.05 0.05"
-					class="clickable"
-					gesture-handler
-				>
-				</a-entity>
+				<a-entity id="bowser-model2" gltf-model="#bowser2" position="0 0 0" scale="0.05 0.05 0.05" class="clickable" gesture-handler> </a-entity>
 			</a-marker>
 			<a-entity camera></a-entity>
+			<script src="multiple.js"></script>
 		</a-scene>
 	</body>
 </html>
