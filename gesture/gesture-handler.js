@@ -1,5 +1,5 @@
 /* global AFRAME, THREE */
-let markerVisible = { "bowser-model": false, "bowser-model2": false };
+let markerVisible = { markerA: false, markerB: false };
 
 AFRAME.registerComponent("gesture-handler", {
 	schema: {
