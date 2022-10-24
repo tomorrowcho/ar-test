@@ -1,5 +1,4 @@
 /* global AFRAME, THREE */
-let markerVisible = { markerA: false, markerB: false };
 
 AFRAME.registerComponent("gesture-handler", {
 	schema: {
@@ -18,18 +17,24 @@ AFRAME.registerComponent("gesture-handler", {
 		this.scaleFactor = 1;
 
 		this.el.sceneEl.addEventListener("markerFound", (e) => {
-			let marker = this.el;
-			this.isVisible = true;
+			// this.isVisible = true;
 			// markerVisible[marker.id] = true;
-			console.log(marker.id + " is visible");
-			// console.log(e);
+			document.getElementById("bowser-model").setAttribute("visible", "true");
+			document.getElementById("bowser-model").setAttribute("gesture-handler", "enabled: true");
+
+			document.getElementById("bowser-model2").setAttribute("visible", "true");
+			document.getElementById("bowser-model2").setAttribute("gesture-handler", "enabled: true");
+			console.log(e);
 		});
 
 		this.el.sceneEl.addEventListener("markerLost", (e) => {
-			let marker = this.el;
-			this.isVisible = false;
+			// this.isVisible = false;
+			document.getElementById("bowser-model").setAttribute("visible", "false");
+			document.getElementById("bowser-model").setAttribute("gesture-handler", "enabled: false");
+
+			document.getElementById("bowser-model2").setAttribute("visible", "false");
+			document.getElementById("bowser-model2").setAttribute("gesture-handler", "enabled: false");
 			// markerVisible[marker.id] = false;
-			console.log(marker.id + " is not visible");
 			// console.log(e);
 		});
 	},
