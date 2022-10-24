@@ -17,23 +17,13 @@ AFRAME.registerComponent("gesture-handler", {
 		this.scaleFactor = 1;
 
 		this.el.sceneEl.addEventListener("markerFound", (e) => {
-			// this.isVisible = true;
+			this.isVisible = true;
 			// markerVisible[marker.id] = true;
-			document.getElementById("bowser-model").setAttribute("visible", "true");
-			document.getElementById("bowser-model").setAttribute("gesture-handler", "enabled: true");
-
-			document.getElementById("bowser-model2").setAttribute("visible", "true");
-			document.getElementById("bowser-model2").setAttribute("gesture-handler", "enabled: true");
 			console.log(e);
 		});
 
 		this.el.sceneEl.addEventListener("markerLost", (e) => {
-			// this.isVisible = false;
-			document.getElementById("bowser-model").setAttribute("visible", "false");
-			document.getElementById("bowser-model").setAttribute("gesture-handler", "enabled: false");
-
-			document.getElementById("bowser-model2").setAttribute("visible", "false");
-			document.getElementById("bowser-model2").setAttribute("gesture-handler", "enabled: false");
+			this.isVisible = false;
 			// markerVisible[marker.id] = false;
 			// console.log(e);
 		});
@@ -67,6 +57,7 @@ AFRAME.registerComponent("gesture-handler", {
 	},
 
 	handleScale: function (event) {
+		console.log(this);
 		if (this.isVisible) {
 			this.scaleFactor *= 1 + event.detail.spreadChange / event.detail.startSpread;
 
