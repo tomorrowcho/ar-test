@@ -17,11 +17,19 @@ AFRAME.registerComponent("gesture-handler", {
 		this.scaleFactor = 1;
 
 		this.el.sceneEl.addEventListener("markerFound", (e) => {
-			this.isVisible = true;
+			let marker = this.el;
+			// this.isVisible = true;
+			markerVisible[marker.id] = true;
+			console.log(markerVisible);
+			console.log(e);
 		});
 
 		this.el.sceneEl.addEventListener("markerLost", (e) => {
-			this.isVisible = false;
+			let marker = this.el;
+			// this.isVisible = false;
+			markerVisible[marker.id] = false;
+			console.log(markerVisible);
+			console.log(e);
 		});
 	},
 
