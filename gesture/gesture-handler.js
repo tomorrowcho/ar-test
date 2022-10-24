@@ -19,7 +19,7 @@ AFRAME.registerComponent("gesture-handler", {
 		this.el.sceneEl.addEventListener("markerFound", (e) => {
 			this.isVisible = true;
 			// markerVisible[marker.id] = true;
-			console.log(e);
+			console.log(e.target.id, e.currentTarget.id);
 		});
 
 		this.el.sceneEl.addEventListener("markerLost", (e) => {
