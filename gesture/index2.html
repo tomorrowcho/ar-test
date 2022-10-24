@@ -25,6 +25,9 @@
 			<a-assets>
 				<a-asset-item id="bowser" src="./data/shiba/scene.gltf"> </a-asset-item>
 			</a-assets>
+			<a-assets>
+				<a-asset-item id="bowser2" src="./data/girl.glb"> </a-asset-item>
+			</a-assets>
 
 			<a-marker
 				preset="hiro"
@@ -44,21 +47,6 @@
 				>
 				</a-entity>
 			</a-marker>
-			<a-entity camera></a-entity>
-			<!-- <script src="multiple.js"></script> -->
-		</a-scene>
-		<a-scene
-			arjs
-			embedded
-			renderer="logarithmicDepthBuffer: true;"
-			vr-mode-ui="enabled: false"
-			gesture-detector
-			id="scene2"
-		>
-			<a-assets>
-				<a-asset-item id="bowser2" src="./data/girl.glb"> </a-asset-item>
-			</a-assets>
-
 			<a-marker
 				preset="custom"
 				type="pattern"
