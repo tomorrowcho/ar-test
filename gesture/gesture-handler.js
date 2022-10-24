@@ -19,7 +19,7 @@ AFRAME.registerComponent("gesture-handler", {
 		this.el.sceneEl.addEventListener("markerFound", (e) => {
 			this.isVisible = true;
 			// markerVisible[marker.id] = true;
-			console.log(e.target.id, e.currentTarget.id);
+			console.log("e.target.id", e.target.id, "e.currentTarget.id", e.currentTarget.id);
 		});
 
 		this.el.sceneEl.addEventListener("markerLost", (e) => {
@@ -58,7 +58,7 @@ AFRAME.registerComponent("gesture-handler", {
 
 	handleScale: function (event) {
 		if (this.isVisible) {
-			console.log(this.data);
+			console.log(this.data, typeof this.data);
 			this.scaleFactor *= 1 + event.detail.spreadChange / event.detail.startSpread;
 
 			this.scaleFactor = Math.min(Math.max(this.scaleFactor, this.data.minScale), this.data.maxScale);
